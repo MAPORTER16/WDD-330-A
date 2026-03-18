@@ -11,6 +11,7 @@ export default class ProductDetails {
   async init() {
     // use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
     this.product = await this.dataSource.findProductById(this.productId);
+    if (!this.product) return;
     // the product details are needed before rendering the HTML
     this.renderProductDetails();
     // once the HTML is rendered, add a listener to the Add to Cart button
@@ -21,7 +22,8 @@ export default class ProductDetails {
   }
 
   addProductToCart() {
-    const cartItems = getLocalStorage("so-cart") || [];
+    let cartItems = getLocalStorage("so-cart");
+    if (!Array.isArray(cartItems)) cartItems = [];
     cartItems.push(this.product);
     setLocalStorage("so-cart", cartItems);
   }
@@ -36,7 +38,7 @@ function productDetailsTemplate(product) {
   document.querySelector('h3').textContent = product.NameWithoutBrand;
 
   const productImage = document.getElementById('productImage');
-  productImage.src = product.Image;
+  productImage.src = product.Images.PrimaryLarge;
   productImage.alt = product.NameWithoutBrand;
 
   document.getElementById('productPrice').textContent = product.FinalPrice;

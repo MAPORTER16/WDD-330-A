@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -258,6 +258,23 @@ button {
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
+  position: relative;
+}
+
+.cart-card__remove {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #999;
+  font-size: 1rem;
+  line-height: 1;
+  z-index: 1;
+}
+
+.cart-card__remove:hover {
+  color: #c00;
 }
 
 .cart-card__image {
