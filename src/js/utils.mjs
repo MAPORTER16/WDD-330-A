@@ -38,3 +38,7 @@ export function renderListWithTemplate(template, parentElement, list, position =
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
+
+export function loadHeaderFooter() {
+  // placeholder for future header/footer loading
+}
