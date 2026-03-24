@@ -328,3 +328,52 @@ footer {
   border-top: 1px solid var(--tertiary-color);
   padding: 1em;
 }
+
+/* Alert styles */
+.alert {
+  padding: 0.75em 1em;
+  margin: 0.5em 1em;
+  background-color: #fce4e4;
+  border: 1px solid #cc0033;
+  color: #cc0033;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert-close {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0 0.5em;
+}
+
+/* Checkout form styles */
+form[name="checkout"] fieldset {
+  border: 1px solid var(--light-grey);
+  margin-bottom: 1em;
+  padding: 1em;
+}
+
+form[name="checkout"] legend {
+  font-weight: bold;
+  padding: 0 0.5em;
+}
+
+form[name="checkout"] label {
+  display: block;
+  margin-top: 0.5em;
+  font-size: var(--small-font);
+}
+
+form[name="checkout"] input {
+  width: 100%;
+  padding: 0.5em;
+  margin-top: 0.25em;
+  border: 1px solid var(--light-grey);
+  font-size: 1em;
+}
+
+form[name="checkout"] button {
+  width: 100%;
+  margin-top: 1em;
+}

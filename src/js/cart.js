@@ -5,6 +5,11 @@ loadHeaderFooter();
 function renderCartContents() {
   let cartItems = getLocalStorage("so-cart");
   if (!Array.isArray(cartItems)) cartItems = [];
+  // Filter out any malformed items that would crash the template
+  cartItems = cartItems.filter(
+    (item) => item && item.Id && item.Images && item.Colors && item.Colors.length
+  );
+  setLocalStorage("so-cart", cartItems);
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 
