@@ -24,7 +24,13 @@ export default class ProductDetails {
   addProductToCart() {
     let cartItems = getLocalStorage("so-cart");
     if (!Array.isArray(cartItems)) cartItems = [];
-    cartItems.push(this.product);
+    const existing = cartItems.find((item) => item.Id === this.product.Id);
+    if (existing) {
+      existing.Quantity = (existing.Quantity || 1) + 1;
+    } else {
+      this.product.Quantity = 1;
+      cartItems.push(this.product);
+    }
     setLocalStorage("so-cart", cartItems);
   }
 
