@@ -7,6 +7,10 @@ const myCheckout = new CheckoutProcess("so-cart", ".order-summary");
 myCheckout.init();
 myCheckout.calculateOrderTotal();
 
+document.querySelector("#zip").addEventListener("blur", () => {
+    myCheckout.calculateOrderTotal();
+});
+
 document.querySelector("#checkoutSubmit").addEventListener("click", (e) => {
     e.preventDefault();
     const myForm = document.forms["checkout"];

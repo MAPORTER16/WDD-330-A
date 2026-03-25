@@ -8,7 +8,7 @@ function packageItems(items) {
         id: item.Id,
         name: item.Name,
         price: item.FinalPrice,
-        quantity: 1,
+        quantity: item.Quantity || 1,
     }));
 }
 
@@ -36,15 +36,17 @@ export default class CheckoutProcess {
             this.outputSelector + " #num-items"
         );
         this.itemTotal = this.list.reduce(
-            (total, item) => total + item.FinalPrice,
+            (total, item) => total + item.FinalPrice * (item.Quantity || 1),
             0
         );
-        itemNumElement.textContent = this.list.length;
+        const totalItems = this.list.reduce((sum, item) => sum + (item.Quantity || 1), 0);
+        itemNumElement.textContent = totalItems;
         summaryElement.textContent = `$${this.itemTotal.toFixed(2)}`;
     }
 
     calculateOrderTotal() {
-        this.shipping = 10 + (this.list.length - 1) * 2;
+        const totalItems = this.list.reduce((sum, item) => sum + (item.Quantity || 1), 0);
+        this.shipping = totalItems > 0 ? 10 + (totalItems - 1) * 2 : 0;
         this.tax = (this.itemTotal * 0.06).toFixed(2);
         this.orderTotal = (
             parseFloat(this.itemTotal) +
@@ -83,6 +85,9 @@ export default class CheckoutProcess {
             expiration: formElement.expiration.value,
             code: formElement.code.value,
             items: packageItems(this.list),
+            orderTotal: this.orderTotal,
+            shipping: this.shipping,
+            tax: this.tax,
         };
 
         try {
